@@ -1,0 +1,36 @@
+{
+  "name": "go-fetch-content-type",
+  "description": "Parse the `Content-Type` header.",
+  "keywords": [
+    "content-type",
+    "mime-type",
+    "type",
+    "charset",
+    "header",
+    "http",
+    "https",
+    "client",
+    "request",
+    "fetch"
+  ],
+  "version": "0.1.0",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:go-fetch-js/content-type.git"
+  },
+  "bugs": {
+    "url": "https://github.com/go-fetch-js/content-type/issues"
+  },
+  "dependencies": {
+    "parse-http-header": "^1.0.0"
+  },
+  "devDependencies": {
+    "go-fetch": "^2.0.0"
+  },
+  "peerDependencies": {
+    "go-fetch": "^2.0.0"
+  },
+  "scripts": {
+    "test": "mocha"
+  }
+}
