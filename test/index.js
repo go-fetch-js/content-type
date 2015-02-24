@@ -21,7 +21,9 @@ describe('content-type', function() {
 		client.emit(event);
 
 		//check the result
-		assert.equal(event.request.getContentType(), 'application/json');
+		assert.equal(event.request.getContentType(),  'application/json');
+		assert.equal(event.request.getCharset(),      'utf-8');
+		assert(event.request.isContentType('application/json'));
 
 	});
 

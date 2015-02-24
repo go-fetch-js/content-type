@@ -32,6 +32,16 @@ module.exports = function(client) {
 		}
 	};
 
+
+	/**
+	 * Check the content type
+	 * @param   {string}  type  The mime type
+	 * @returns {string}
+	 */
+	function isContentType(type) {
+		return this.getContentType() === type;
+	};
+
 	client.on('before', function (event) {
 
 		var
@@ -41,9 +51,11 @@ module.exports = function(client) {
 
 		request.getContentType  = getContentType;
 		request.getCharset      = getCharset;
+		request.isContentType   = isContentType;
 
 		response.getContentType = getContentType;
 		response.getCharset     = getCharset;
+		response.isContentType  = isContentType;
 
 	});
 

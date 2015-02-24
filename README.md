@@ -2,7 +2,7 @@
 
 [![Circle CI](https://circleci.com/gh/go-fetch-js/content-type.svg?style=svg)](https://circleci.com/gh/go-fetch-js/content-type)
 
-Parse the `Content-Type` header and add `.getContentType()` and `.getCharset()` methods to the request and response objects
+Parse the `Content-Type` header and add accessors to the request and response objects
 
 ## Installation 
 
@@ -19,7 +19,21 @@ Parse the `Content-Type` header and add `.getContentType()` and `.getCharset()` 
             console.log(error, response.getContentType());
         })
     ;
+    
+## Methods
+
+### .getContentType()
+
+Get the content type e.g. `text/html`
         
+### .getCharset()
+
+Get the charset e.g. `utf-8`
+        
+### .isContentType(type)
+
+Check whether the response is of the specified type
+
 ## License
 
 The MIT License (MIT)
