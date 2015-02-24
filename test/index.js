@@ -29,90 +29,42 @@ describe('content-type', function() {
 
 	describe('.isContentType()', function() {
 
-		it('should return true for a string', function() {
-
-			var client  = new Client();
-			var event   = new Client.Event({
-				name:     'before',
-				request:  new Client.Request('GET', 'https://api.github.com/users/digitaledgeit/repos', {'Content-Type': 'application/json; charset=utf-8'}),
-				response: new Client.Response(),
-				emitter:  client
-			});
-
-			//init the plugin
-			plugin(client);
-
-			//execute the plugin
-			client.emit(event);
-
-			//check the result
-			assert(event.request.isContentType('application/json'));
-
+		it('should return false when the content-type does not match', function() {
+			var response = plugin.mixin(new Client.Response());
+			response.setHeader('Content-Type', 'text/html');
+			assert(!response.isContentType('application/json'));
 		});
 
-		it('should return false for a string', function() {
-
-			var client  = new Client();
-			var event   = new Client.Event({
-				name:     'before',
-				request:  new Client.Request('GET', 'https://api.github.com/users/digitaledgeit/repos', {'Content-Type': 'application/json; charset=utf-8'}),
-				response: new Client.Response(),
-				emitter:  client
-			});
-
-			//init the plugin
-			plugin(client);
-
-			//execute the plugin
-			client.emit(event);
-
-			//check the result
-			assert(!event.request.isContentType('text/html'));
-
+		it('should return true when the content-type matches', function() {
+			var response = plugin.mixin(new Client.Response());
+			response.setHeader('Content-Type', 'application/json');
+			assert(response.isContentType('application/json'));
 		});
 
-		it('should return true for an item in an array', function() {
-
-			var client  = new Client();
-			var event   = new Client.Event({
-				name:     'before',
-				request:  new Client.Request('GET', 'https://api.github.com/users/digitaledgeit/repos', {'Content-Type': 'application/json; charset=utf-8'}),
-				response: new Client.Response(),
-				emitter:  client
-			});
-
-			//init the plugin
-			plugin(client);
-
-			//execute the plugin
-			client.emit(event);
-
-			//check the result
-			assert(event.request.isContentType(['text/html', 'application/json']));
-
+		it('should return false when the content-type matches any', function() {
+			var response = plugin.mixin(new Client.Response());
+			response.setHeader('Content-Type', 'text/html');
+			assert(response.isContentType(['text/plain', 'text/html']));
 		});
 
-		it('should return false for an item in an array', function() {
-
-			var client  = new Client();
-			var event   = new Client.Event({
-				name:     'before',
-				request:  new Client.Request('GET', 'https://api.github.com/users/digitaledgeit/repos', {'Content-Type': 'application/json; charset=utf-8'}),
-				response: new Client.Response(),
-				emitter:  client
-			});
-
-			//init the plugin
-			plugin(client);
-
-			//execute the plugin
-			client.emit(event);
-
-			//check the result
-			assert(!event.request.isContentType(['text/html', 'text/plain']));
-
+		it('should return true when the content-type matches a double wildcard', function() {
+			var response = plugin.mixin(new Client.Response());
+			response.setHeader('Content-Type', 'text/html');
+			assert(response.isContentType('*/*'));
 		});
 
-	})
+		it('should return true when the content-type matches a single wildcard', function() {
+			var response = plugin.mixin(new Client.Response());
+			response.setHeader('Content-Type', 'text/html');
+			assert(response.isContentType('text/*'));
+		});
+
+		it('should return false when the content-type does not match a single wildcard', function() {
+			var response = plugin.mixin(new Client.Response());
+			response.setHeader('Content-Type', 'applicaiton/html');
+			assert(!response.isContentType('text/*'));
+		});
+
+	});
 
 });

@@ -13,7 +13,7 @@
     "request",
     "fetch"
   ],
-  "version": "0.2.0",
+  "version": "0.3.0",
   "repository": {
     "type": "git",
     "url": "git@github.com:go-fetch-js/content-type.git"
@@ -22,7 +22,8 @@
     "url": "https://github.com/go-fetch-js/content-type/issues"
   },
   "dependencies": {
-    "parse-http-header": "^1.0.0"
+    "parse-http-header": "^1.0.0",
+    "type-is": "^1.6.0"
   },
   "devDependencies": {
     "go-fetch": "^2.0.0"
