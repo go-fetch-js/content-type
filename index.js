@@ -34,12 +34,16 @@ module.exports = function(client) {
 
 
 	/**
-	 * Check the content type
-	 * @param   {string}  type  The mime type
+	 * Check (one of) the content type(s) match
+	 * @param   {string|Array.<string>}  type  The mime content type(s)
 	 * @returns {string}
 	 */
 	function isContentType(type) {
-		return this.getContentType() === type;
+		if (Array.isArray(type)) {
+			return type.indexOf(this.getContentType()) !== -1;
+		} else {
+			return this.getContentType() === type;
+		}
 	};
 
 	client.on('before', function (event) {
